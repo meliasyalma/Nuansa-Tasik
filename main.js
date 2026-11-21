@@ -154,7 +154,10 @@ function createDestinationCard(dest) {
 /* ==========================================
    NAVBAR & UI GLOBAL
    ========================================== */
-function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    if (menu) menu.classList.toggle('hidden');
+}
 
 const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
@@ -164,6 +167,17 @@ function observeReveals() { document.querySelectorAll('.reveal').forEach(el => r
 document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
     updateFavBadge();
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenu) {
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+    }
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024 && mobileMenu) {
+            mobileMenu.classList.add('hidden');
+        }
+    });
     const currentPage = document.body.dataset.page || 'home';
     const navbar = document.getElementById('navbar');
     function updateNav() {
