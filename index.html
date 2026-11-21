@@ -4,18 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuansa Tasikmalaya — Eksplorasi Keindahan Alam & Budaya Tasikmalaya</title>
-    <link rel="icon" type="image/png" href="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="gambar2">
+    <link rel="icon" type="image/png" href="https://i.ibb.co.com/chTZXvHs/gambar2.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = { theme: { extend: { colors: { forest:'#123B35', emeraldNature:'#27866C', mintSoft:'#E9F4EF', amberWarm:'#F4B860', creamLight:'#FAF8F5' }, fontFamily: { heading:['Poppins','sans-serif'], sans:['Inter','sans-serif'] }, boxShadow: { 'soft':'0 10px 30px -5px rgba(18,59,53,0.08)', 'card':'0 20px 40px -15px rgba(18,59,53,0.12)' } } } };
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: '#123B35',
+                        emeraldNature: '#27866C',
+                        mintSoft: '#E9F4EF',
+                        amberWarm: '#F4B860',
+                        creamLight: '#FAF8F5'
+                    },
+                    fontFamily: {
+                        heading: ['Poppins', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    boxShadow: {
+                        soft: '0 10px 30px -5px rgba(18,59,53,0.08)',
+                        card: '0 20px 40px -15px rgba(18,59,53,0.12)'
+                    }
+                }
+            }
+        };
     </script>
-    
-    <!-- PERBAIKAN 1: Mengganti CDN Lucide ke versi stabil (TANPA @latest) -->
-    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
-    
+    <script src="https://unpkg.com/lucide@latest" defer></script>
     <link rel="stylesheet" href="css/syalma_style.css">
 </head>
 <body class="antialiased selection:bg-emeraldNature selection:text-white flex flex-col min-h-screen" data-page="home">
@@ -24,11 +41,11 @@
 <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-white py-4">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <a href="index.html" class="flex items-center gap-2.5 group text-left focus:outline-none">
-            <div class="w-14 h-14 rounded-xl overflow-hidden justify-center shadow-md group-hover:scale-105 transition-transform">
-                <img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="gambar2" alt="Logo Nuansa Tasikmalaya" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-6 h-6 text-forest stroke-[2.2]\'></i>'; if(typeof lucide !== \'undefined\') lucide.createIcons();">
+            <div class="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center bg-white/10 shadow-md group-hover:scale-105 transition-transform">
+                <img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="Logo Nuansa Tasikmalaya" class="w-full h-full object-contain p-1" onerror="handleImageFallback(this, 'compass')">
             </div>
             <div>
-                <span class="font-heading font-bold text-xl tracking-tight block leading-none ">Nuansa<span class="text-amberWarm" >Tasikmalaya</span></span>
+                <span class="font-heading font-bold text-xl tracking-tight block leading-none">Nuansa<span class="text-amberWarm">Tasikmalaya</span></span>
             </div>
         </a>
         <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
@@ -46,7 +63,9 @@
                 <span class="hidden sm:inline text-xs font-semibold">Favorit</span>
                 <span id="fav-badge" class="ml-0.5 px-1.5 py-0.5 text-[11px] font-bold rounded-full bg-amberWarm text-forest">0</span>
             </button>
-            <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-white/15 hover:bg-white/25 transition-colors"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-white/15 hover:bg-white/25 transition-colors" aria-label="Buka menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
         </div>
     </div>
     <div id="mobile-menu" class="hidden lg:hidden bg-forest text-white border-t border-white/10 mt-3 px-4 pt-3 pb-6 shadow-2xl">
@@ -66,7 +85,7 @@
     <!-- HERO -->
     <section class="relative min-h-[92vh] flex items-center justify-center overflow-hidden bg-forest">
         <div class="absolute inset-0 z-0 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80" alt="Panorama Alam Tasikmalaya" class="w-full h-full object-cover animate-hero-bg opacity-70">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80" alt="Panorama Alam Tasikmalaya" class="w-full h-full object-cover animate-hero-bg opacity-70" onerror="this.style.display='none'">
             <div class="absolute inset-0 bg-gradient-to-b from-forest/80 via-forest/55 to-forest/95"></div>
         </div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 text-center text-white">
@@ -107,8 +126,8 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center reveal">
                 <div class="relative">
                     <div class="grid grid-cols-2 gap-4">
-                        <img src="https://i.pinimg.com/1200x/ae/9b/c0/ae9bc0ec3386f3e83662cd01c7b07dae.jpg" alt="Alam" class="rounded-3xl h-64 sm:h-80 w-full object-cover shadow-card">
-                        <img src="https://i.pinimg.com/736x/3c/2e/48/3c2e4888214db717cb3c73c594dd81b0.jpg" alt="Pantai" class="rounded-3xl h-64 sm:h-80 w-full object-cover shadow-card mt-8">
+                        <img src="https://i.pinimg.com/1200x/ae/9b/c0/ae9bc0ec3386f3e83662cd01c7b07dae.jpg" alt="Pemandangan Alam Tasikmalaya" class="rounded-3xl h-64 sm:h-80 w-full object-cover shadow-card bg-mintSoft" onerror="this.alt='Gambar alam tidak dapat dimuat'; this.classList.add('p-4')">
+                        <img src="https://i.pinimg.com/736x/3c/2e/48/3c2e4888214db717cb3c73c594dd81b0.jpg" alt="Pantai Tasikmalaya" class="rounded-3xl h-64 sm:h-80 w-full object-cover shadow-card mt-8 bg-mintSoft" onerror="this.alt='Gambar pantai tidak dapat dimuat'; this.classList.add('p-4')">
                     </div>
                     <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-forest text-white px-6 py-4 rounded-2xl shadow-xl flex items-center gap-3 w-max">
                         <div class="w-10 h-10 rounded-full bg-amberWarm text-forest flex items-center justify-center"><i data-lucide="sparkles" class="w-5 h-5"></i></div>
@@ -137,11 +156,11 @@
                 <h2 class="font-heading text-3xl sm:text-4xl font-bold text-forest mt-2">Eksplorasi Berdasarkan Kategori</h2>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6">
-                <a class="group p-6 rounded-3xl bg-mintSoft/50 hover:bg-forest text-center transition-all duration-300 border border-emeraldNature/10 hover:-translate-y-1.5 shadow-soft"><div class="w-14 h-14 mx-auto rounded-2xl bg-white text-emeraldNature group-hover:bg-amberWarm group-hover:text-forest flex items-center justify-center mb-4 shadow-sm"><i data-lucide="mountain" class="w-7 h-7"></i></div><h3 class="font-heading font-bold text-forest group-hover:text-white text-base">Pegunungan</h3><p class="text-xs text-slate-500 group-hover:text-mintSoft/80 mt-1">Kawah & Ketinggian</p></a>
-                <a class="group p-6 rounded-3xl bg-mintSoft/50 hover:bg-forest text-center transition-all duration-300 border border-emeraldNature/10 hover:-translate-y-1.5 shadow-soft"><div class="w-14 h-14 mx-auto rounded-2xl bg-white text-emeraldNature group-hover:bg-amberWarm group-hover:text-forest flex items-center justify-center mb-4 shadow-sm"><i data-lucide="waves" class="w-7 h-7"></i></div><h3 class="font-heading font-bold text-forest group-hover:text-white text-base">Pantai</h3><p class="text-xs text-slate-500 group-hover:text-mintSoft/80 mt-1">Pesisir Cipatujah</p></a>
-                <a class="group p-6 rounded-3xl bg-mintSoft/50 hover:bg-forest text-center transition-all duration-300 border border-emeraldNature/10 hover:-translate-y-1.5 shadow-soft"><div class="w-14 h-14 mx-auto rounded-2xl bg-white text-emeraldNature group-hover:bg-amberWarm group-hover:text-forest flex items-center justify-center mb-4 shadow-sm"><i data-lucide="trees" class="w-7 h-7"></i></div><h3 class="font-heading font-bold text-forest group-hover:text-white text-base">Wisata Alam</h3><p class="text-xs text-slate-500 group-hover:text-mintSoft/80 mt-1">Curug & Canyon</p></a>
-                <a class="group p-6 rounded-3xl bg-mintSoft/50 hover:bg-forest text-center transition-all duration-300 border border-emeraldNature/10 hover:-translate-y-1.5 shadow-soft"><div class="w-14 h-14 mx-auto rounded-2xl bg-white text-emeraldNature group-hover:bg-amberWarm group-hover:text-forest flex items-center justify-center mb-4 shadow-sm"><i data-lucide="landmark" class="w-7 h-7"></i></div><h3 class="font-heading font-bold text-forest group-hover:text-white text-base">Wisata Budaya</h3><p class="text-xs text-slate-500 group-hover:text-mintSoft/80 mt-1">Adat & Sejarah</p></a>
-                <a class="col-span-2 md:col-span-1 group p-6 rounded-3xl bg-mintSoft/50 hover:bg-forest text-center transition-all duration-300 border border-emeraldNature/10 hover:-translate-y-1.5 shadow-soft"><div class="w-14 h-14 mx-auto rounded-2xl bg-white text-emeraldNature group-hover:bg-amberWarm group-hover:text-forest flex items-center justify-center mb-4 shadow-sm"><i data-lucide="smile" class="w-7 h-7"></i></div><h3 class="font-heading font-bold text-forest group-hover:text-white text-base">Keluarga</h3><p class="text-xs text-slate-500 group-hover:text-mintSoft/80 mt-1">Rekreasi & Edukasi</p></a>
+                <a href="wisata.html?kategori=Pegunungan" class="group p-6 rounded-3xl bg-mintSoft/50 hover:bg-forest text-center transition-all duration-300 border border-emeraldNature/10 hover:-translate-y-1.5 shadow-soft"><div class="w-14 h-14 mx-auto rounded-2xl bg-white text-emeraldNature group-hover:bg-amberWarm group-hover:text-forest flex items-center justify-center mb-4 shadow-sm"><i data-lucide="mountain" class="w-7 h-7"></i></div><h3 class="font-heading font-bold text-forest group-hover:text-white text-base">Pegunungan</h3><p class="text-xs text-slate-500 group-hover:text-mintSoft/80 mt-1">Kawah & Ketinggian</p></a>
+                <a href="wisata.html?kategori=Pantai" class="group p-6 rounded-3xl bg-mintSoft/50 hover:bg-forest text-center transition-all duration-300 border border-emeraldNature/10 hover:-translate-y-1.5 shadow-soft"><div class="w-14 h-14 mx-auto rounded-2xl bg-white text-emeraldNature group-hover:bg-amberWarm group-hover:text-forest flex items-center justify-center mb-4 shadow-sm"><i data-lucide="waves" class="w-7 h-7"></i></div><h3 class="font-heading font-bold text-forest group-hover:text-white text-base">Pantai</h3><p class="text-xs text-slate-500 group-hover:text-mintSoft/80 mt-1">Pesisir Cipatujah</p></a>
+                <a href="wisata.html?kategori=Alam" class="group p-6 rounded-3xl bg-mintSoft/50 hover:bg-forest text-center transition-all duration-300 border border-emeraldNature/10 hover:-translate-y-1.5 shadow-soft"><div class="w-14 h-14 mx-auto rounded-2xl bg-white text-emeraldNature group-hover:bg-amberWarm group-hover:text-forest flex items-center justify-center mb-4 shadow-sm"><i data-lucide="trees" class="w-7 h-7"></i></div><h3 class="font-heading font-bold text-forest group-hover:text-white text-base">Wisata Alam</h3><p class="text-xs text-slate-500 group-hover:text-mintSoft/80 mt-1">Curug & Canyon</p></a>
+                <a href="wisata.html?kategori=Budaya" class="group p-6 rounded-3xl bg-mintSoft/50 hover:bg-forest text-center transition-all duration-300 border border-emeraldNature/10 hover:-translate-y-1.5 shadow-soft"><div class="w-14 h-14 mx-auto rounded-2xl bg-white text-emeraldNature group-hover:bg-amberWarm group-hover:text-forest flex items-center justify-center mb-4 shadow-sm"><i data-lucide="landmark" class="w-7 h-7"></i></div><h3 class="font-heading font-bold text-forest group-hover:text-white text-base">Wisata Budaya</h3><p class="text-xs text-slate-500 group-hover:text-mintSoft/80 mt-1">Adat & Sejarah</p></a>
+                <a href="wisata.html?kategori=Keluarga" class="col-span-2 md:col-span-1 group p-6 rounded-3xl bg-mintSoft/50 hover:bg-forest text-center transition-all duration-300 border border-emeraldNature/10 hover:-translate-y-1.5 shadow-soft"><div class="w-14 h-14 mx-auto rounded-2xl bg-white text-emeraldNature group-hover:bg-amberWarm group-hover:text-forest flex items-center justify-center mb-4 shadow-sm"><i data-lucide="smile" class="w-7 h-7"></i></div><h3 class="font-heading font-bold text-forest group-hover:text-white text-base">Keluarga</h3><p class="text-xs text-slate-500 group-hover:text-mintSoft/80 mt-1">Rekreasi & Edukasi</p></a>
             </div>
         </div>
     </div>
@@ -186,7 +205,7 @@
     <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl max-h-[85vh] flex flex-col">
         <div class="flex items-center justify-between pb-4 border-b border-slate-100">
             <div class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-xl bg-mintSoft text-emeraldNature flex items-center justify-center"><i data-lucide="heart" class="w-5 h-5 fill-emeraldNature"></i></div><h3 class="font-heading font-bold text-lg text-forest">Destinasi Favorit Anda</h3></div>
-            <button onclick="toggleFavoritesModal()" class="p-2 rounded-xl hover:bg-slate-100 text-slate-500"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <button onclick="toggleFavoritesModal()" class="p-2 rounded-xl hover:bg-slate-100 text-slate-500" aria-label="Tutup modal"><i data-lucide="x" class="w-5 h-5"></i></button>
         </div>
         <div id="favorites-list-container" class="py-4 overflow-y-auto space-y-3 flex-grow"></div>
     </div>
@@ -206,7 +225,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
             <div>
                 <div class="flex items-center gap-2.5 mb-4">
-                    <div class="w-12 h-12 rounded-xl overflow-hidden  justify-center"><img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="gambar2" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-5 h-5 text-forest\'></i>'; if(typeof lucide !== \'undefined\') lucide.createIcons();"></div>
+                    <div class="w-12 h-12 rounded-xl overflow-hidden flex items-center justify-center bg-white/10">
+                        <img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="Logo Nuansa Tasikmalaya" class="w-full h-full object-contain p-1" onerror="handleImageFallback(this, 'compass')">
+                    </div>
                     <span class="font-heading font-bold text-xl">Nuansa <span class="text-amberWarm">Tasikmalaya</span></span>
                 </div>
                 <p class="text-mintSoft/80 text-sm leading-relaxed mb-5">Portal pariwisata digital Tasikmalaya.</p>
@@ -246,18 +267,32 @@
 
 <script src="js/main.js"></script>
 <script>
-    // ===== Home Page Script =====
-    function renderHomePopular() {
-        const grid = document.getElementById('home-popular-grid');
-        if (typeof destinationsData !== 'undefined') {
-            const popular = destinationsData.filter(d => d.popular).slice(0, 4);
-            grid.innerHTML = popular.map(createDestinationCard).join('');
-            // PERBAIKAN 2: Render ulang ikon setelah kartu destinasi masuk
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
+    function renderIconsSafe() {
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
         }
     }
+
+    function handleImageFallback(imgEl, iconName) {
+        if (!imgEl || !imgEl.parentElement) return;
+        imgEl.style.display = 'none';
+        if (!imgEl.parentElement.querySelector('[data-fallback-icon]')) {
+            const span = document.createElement('span');
+            span.setAttribute('data-fallback-icon', 'true');
+            span.className = 'text-amberWarm font-bold text-xs';
+            span.textContent = iconName === 'compass' ? 'NT' : 'IMG';
+            imgEl.parentElement.appendChild(span);
+        }
+    }
+
+    function renderHomePopular() {
+        const grid = document.getElementById('home-popular-grid');
+        if (!grid || typeof destinationsData === 'undefined' || typeof createDestinationCard !== 'function') return;
+        const popular = destinationsData.filter(d => d.popular).slice(0, 4);
+        grid.innerHTML = popular.map(createDestinationCard).join('');
+        renderIconsSafe();
+    }
+
     function goSearch() {
         const q = document.getElementById('hero-search-input').value.trim();
         const cat = document.getElementById('hero-category-select').value;
@@ -266,17 +301,18 @@
         if (cat && cat !== 'Semua') params.set('kategori', cat);
         window.location.href = 'wisata.html' + (params.toString() ? '?' + params.toString() : '');
     }
-    function refreshCurrentView() { renderHomePopular(); }
+
+    function refreshCurrentView() {
+        renderHomePopular();
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
         renderHomePopular();
-        
-        // PERBAIKAN 3: Pastikan ikon statis (navbar, kategori) ter-render saat halaman selesai dimuat
-        setTimeout(() => {
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-        }, 100);
+        renderIconsSafe();
+    });
+
+    window.addEventListener('load', () => {
+        renderIconsSafe();
     });
 </script>
 </body>
