@@ -9,17 +9,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { theme: { extend: { colors: { forest:'#123B35', emeraldNature:'#27866C', mintSoft:'#E9F4EF', amberWarm:'#F4B860', creamLight:'#FAF8F5' }, fontFamily: { heading:['Poppins','sans-serif'], sans:['Inter','sans-serif'] }, boxShadow: { 'soft':'0 10px 30px -5px rgba(18,59,53,0.08)', 'card':'0 20px 40px -15px rgba(18,59,53,0.12)' } } } };</script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- PERBAIKAN: CDN Lucide versi stabil -->
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    
+    <!-- PERBAIKAN: Menyesuaikan path CSS -->
     <link rel="stylesheet" href="css/syalma_style.css">
 </head>
 <body class="antialiased selection:bg-emeraldNature selection:text-white flex flex-col min-h-screen" data-page="destinasi">
 
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-white py-4">
+<!-- NAVBAR (Background diubah jadi bg-forest) -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-forest text-white py-4 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <a href="index.html" class="flex items-center gap-2.5 group"><div class="w-14 h-14 rounded-xl overflow-hidden justify-center shadow-md"><img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="gambar2" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-6 h-6 text-forest\'></i>'; lucide.createIcons();"></div><div><span class="font-heading font-bold text-xl tracking-tight block leading-none">Nuansa<span class="text-amberWarm">Tasikmalaya</span></span><span class="text-[11px] uppercase tracking-widest opacity-85 font-medium">Tasikmalaya</span></div></a>
+        <a href="index.html" class="flex items-center gap-2.5 group">
+            <div class="w-14 h-14 rounded-xl overflow-hidden justify-center shadow-md">
+                <img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-6 h-6 text-forest\'></i>'; if(typeof lucide !== \'undefined\') lucide.createIcons();">
+            </div>
+            <div>
+                <span class="font-heading font-bold text-xl tracking-tight block leading-none">Nuansa<span class="text-amberWarm">Tasikmalaya</span></span>
+                <span class="text-[11px] uppercase tracking-widest opacity-85 font-medium">Tasikmalaya</span>
+            </div>
+        </a>
         <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
             <a href="index.html" data-nav="home" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Home</a>
-            <a href="wisata.html" data-nav="destinasi" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Destinasi</a>
+            <a href="wisata.html" data-nav="destinasi" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15 bg-white/10">Destinasi</a>
             <a href="peta.html" data-nav="peta" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Peta</a>
             <a href="trip-planner.html" data-nav="planner" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Planner</a>
             <a href="kuliner.html" data-nav="kuliner" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Kuliner</a>
@@ -27,7 +40,11 @@
             <a href="kontak.html" data-nav="kontak" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Kontak</a>
         </nav>
         <div class="flex items-center gap-2.5">
-            <button onclick="toggleFavoritesModal()" class="relative p-2.5 rounded-xl bg-white/15 hover:bg-white/25 flex items-center gap-1.5"><i data-lucide="heart" class="w-5 h-5 text-amberWarm fill-amberWarm"></i><span class="hidden sm:inline text-xs font-semibold">Favorit</span><span id="fav-badge" class="ml-0.5 px-1.5 py-0.5 text-[11px] font-bold rounded-full bg-amberWarm text-forest">0</span></button>
+            <button onclick="toggleFavoritesModal()" class="relative p-2.5 rounded-xl bg-white/15 hover:bg-white/25 flex items-center gap-1.5">
+                <i data-lucide="heart" class="w-5 h-5 text-amberWarm fill-amberWarm"></i>
+                <span class="hidden sm:inline text-xs font-semibold">Favorit</span>
+                <span id="fav-badge" class="ml-0.5 px-1.5 py-0.5 text-[11px] font-bold rounded-full bg-amberWarm text-forest">0</span>
+            </button>
             <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-white/15"><i data-lucide="menu" class="w-6 h-6"></i></button>
         </div>
     </div>
@@ -65,24 +82,31 @@
 <footer class="bg-forest text-white pt-16 pb-8 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
-            <div><div class="flex items-center gap-2.5 mb-4"><div class="w-10 h-10 rounded-xl overflow-hidden  justify-center"><img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="gambar2" alt="Logo" class="w-full h-full object-contain p-1"></div><span class="font-heading font-bold text-xl">Nuansa<span class="text-amberWarm">Tasikmalaya</span></span></div><p class="text-mintSoft/80 text-sm">Portal pariwisata digital Tasikmalaya.</p></div>
+            <div><div class="flex items-center gap-2.5 mb-4"><div class="w-10 h-10 rounded-xl overflow-hidden justify-center"><img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="Logo" class="w-full h-full object-contain p-1"></div><span class="font-heading font-bold text-xl">Nuansa<span class="text-amberWarm">Tasikmalaya</span></span></div><p class="text-mintSoft/80 text-sm">Portal pariwisata digital Tasikmalaya.</p></div>
             <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Eksplorasi</h4><ul class="space-y-2.5 text-sm text-mintSoft/80"><li><a href="index.html" class="hover:text-amberWarm">Beranda</a></li><li><a href="wisata.html" class="hover:text-amberWarm">Destinasi</a></li><li><a href="peta.html" class="hover:text-amberWarm">Peta</a></li><li><a href="trip-planner.html" class="hover:text-amberWarm">Planner</a></li></ul></div>
             <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Ragam</h4><ul class="space-y-2.5 text-sm text-mintSoft/80"><li><a href="wisata.html?kategori=Pegunungan" class="hover:text-amberWarm">Pegunungan</a></li><li><a href="wisata.html?kategori=Pantai" class="hover:text-amberWarm">Pantai</a></li><li><a href="kuliner.html" class="hover:text-amberWarm">Kuliner</a></li><li><a href="artikel.html" class="hover:text-amberWarm">Artikel</a></li></ul></div>
-            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Layanan</h4><ul class="space-y-3 text-sm text-mintSoft/80"><li>Jl. KHZ. Mustofa No. 124</li><li>halo@Nuansa Tasikmalaya-tasik.id</li></ul></div>
+            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Layanan</h4><ul class="space-y-3 text-sm text-mintSoft/80"><li>Jl. KHZ. Mustofa No. 124</li><li>halo@Nuansatasik.id</li></ul></div>
         </div>
         <div class="pt-8 text-center text-xs text-mintSoft/60">&copy; 2026 Nuansa Tasikmalaya.</div>
     </div>
 </footer>
 
+<!-- PERBAIKAN: Menyesuaikan path JS -->
 <script src="js/main.js"></script>
 <script>
     // ===== Detail Wisata Script =====
     let currentDest = null;
 
     function renderDetailPage(id) {
+        // PENGAMAN: Jika data dari main.js belum termuat
+        if (typeof destinationsData === 'undefined') {
+            document.getElementById('detail-content-container').innerHTML = '<p class="text-center text-red-500 font-bold">Gagal memuat data wisata. Pastikan file js/main.js sudah benar.</p>';
+            return;
+        }
+
         const dest = destinationsData.find(d => d.id === id) || destinationsData[0];
         currentDest = dest;
-        const isFav = favorites.includes(dest.id);
+        const isFav = typeof favorites !== 'undefined' ? favorites.includes(dest.id) : false;
         const container = document.getElementById('detail-content-container');
         const gmapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${dest.lat},${dest.lng}`;
         document.title = dest.name + ' - Nuansa Tasikmalaya';
@@ -139,7 +163,12 @@
                     </div>
                 </div>
             </div>`;
-        lucide.createIcons();
+        
+        // Render ikon setelah HTML dimasukkan
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+        
         fetchWeather(dest.lat, dest.lng);
     }
 
@@ -153,13 +182,14 @@
             const wmap = { 0:{l:'Cerah',i:'sun'},1:{l:'Cerah Berawan',i:'cloud-sun'},2:{l:'Berawan',i:'cloud-sun'},3:{l:'Mendung',i:'cloud'},45:{l:'Berkabut',i:'cloud-fog'},51:{l:'Gerimis',i:'cloud-drizzle'},61:{l:'Hujan',i:'cloud-rain'},63:{l:'Hujan Sedang',i:'cloud-rain'},80:{l:'Hujan Lokal',i:'cloud-rain'},95:{l:'Hujan Petir',i:'cloud-lightning'} };
             const info = wmap[c.weather_code] || {l:'Sejuk',i:'cloud-sun'};
             box.innerHTML = `<div class="flex items-center gap-3.5"><div class="w-12 h-12 rounded-2xl bg-amberWarm/20 text-amberWarm flex items-center justify-center"><i data-lucide="${info.i}" class="w-7 h-7"></i></div><div><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span class="text-[11px] uppercase tracking-wider text-mintSoft/80 font-semibold">Cuaca Realtime</span></div><p class="font-heading text-2xl font-bold text-white mt-0.5">${Math.round(c.temperature_2m)}°C <span class="text-sm font-normal text-mintSoft">• ${info.l}</span></p></div></div><div class="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-white/15 text-xs text-mintSoft/90"><div class="flex items-center gap-1.5"><i data-lucide="droplets" class="w-3.5 h-3.5 text-amberWarm"></i> Kelembapan: <strong>${c.relative_humidity_2m}%</strong></div><div class="flex items-center gap-1.5"><i data-lucide="wind" class="w-3.5 h-3.5 text-amberWarm"></i> Angin: <strong>${c.wind_speed_10m} km/j</strong></div></div>`;
-            lucide.createIcons();
+            if (typeof lucide !== 'undefined') lucide.createIcons();
         } catch(e) { box.innerHTML = '<p class="text-xs text-mintSoft">Cuaca sejuk (24-29°C).</p>'; }
     }
 
     function refreshCurrentView() { if (currentDest) renderDetailPage(currentDest.id); }
 
     document.addEventListener('DOMContentLoaded', () => {
+        if (typeof lucide !== 'undefined') lucide.createIcons();
         const id = getQueryParam('id');
         if (!id) { window.location.href = 'wisata.html'; return; }
         renderDetailPage(id);
