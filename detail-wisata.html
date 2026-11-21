@@ -13,12 +13,12 @@
     <!-- PERBAIKAN: CDN Lucide versi stabil -->
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
     
-    <!-- PERBAIKAN: Menyesuaikan path CSS -->
-    <link rel="stylesheet" href="css/syalma_style.css">
+    <!-- PERBAIKAN: Path CSS disamakan jadi css/syalma_style.css -->
+    <link rel="stylesheet" href="./syalma_style.css">
 </head>
 <body class="antialiased selection:bg-emeraldNature selection:text-white flex flex-col min-h-screen" data-page="destinasi">
 
-<!-- NAVBAR (Background diubah jadi bg-forest) -->
+<!-- PERBAIKAN: Navbar bg-forest -->
 <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-forest text-white py-4 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <a href="index.html" class="flex items-center gap-2.5 group">
@@ -91,16 +91,16 @@
     </div>
 </footer>
 
-<!-- PERBAIKAN: Menyesuaikan path JS -->
-<script src="js/main.js"></script>
+<!-- PERBAIKAN: Path JS disamakan jadi js/main.js -->
+<script src="./main.js"></script>
 <script>
     // ===== Detail Wisata Script =====
     let currentDest = null;
 
     function renderDetailPage(id) {
-        // PENGAMAN: Jika data dari main.js belum termuat
+        // PERBAIKAN: Pengecekan jika data gagal dimuat
         if (typeof destinationsData === 'undefined') {
-            document.getElementById('detail-content-container').innerHTML = '<p class="text-center text-red-500 font-bold">Gagal memuat data wisata. Pastikan file js/main.js sudah benar.</p>';
+            document.getElementById('detail-content-container').innerHTML = '<p class="text-center text-red-500 font-bold">Gagal memuat data. Pastikan file js/main.js sudah benar.</p>';
             return;
         }
 
@@ -164,10 +164,7 @@
                 </div>
             </div>`;
         
-        // Render ikon setelah HTML dimasukkan
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
+        if (typeof lucide !== 'undefined') lucide.createIcons();
         
         fetchWeather(dest.lat, dest.lng);
     }
