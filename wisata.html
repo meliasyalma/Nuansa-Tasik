@@ -17,8 +17,7 @@
 </head>
 <body class="antialiased selection:bg-emeraldNature selection:text-white flex flex-col min-h-screen" data-page="destinasi">
 
-<!-- NAVBAR -->
-<!-- PERBAIKAN 2: Mengubah bg-transparent menjadi bg-forest agar teks putih terlihat -->
+<!-- PERBAIKAN 2: Navbar diubah jadi bg-forest agar teks putih terlihat -->
 <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-forest text-white py-4 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <a href="index.html" class="flex items-center gap-2.5 group text-left">
@@ -117,7 +116,6 @@
         <p id="toast-message" class="text-xs sm:text-sm font-medium">Aksi berhasil!</p>
     </div>
 </div>
-
 <footer class="bg-forest text-white pt-16 pb-8 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
@@ -148,9 +146,9 @@
         const grid = document.getElementById('destinations-grid');
         const countLabel = document.getElementById('dest-count-label');
         
-        // PENGAMAN: Jika data dari main.js belum termuat
+        // PERBAIKAN 3: Pengecekan jika data gagal dimuat
         if (typeof destinationsData === 'undefined' || typeof createDestinationCard === 'undefined') {
-            countLabel.textContent = "Gagal memuat data. Periksa console browser.";
+            countLabel.textContent = "Gagal memuat data dari main.js. Periksa Console browser.";
             return;
         }
 
@@ -176,16 +174,13 @@
             grid.innerHTML = filtered.map(createDestinationCard).join('');
         }
         
-        // Render ikon setelah kartu dimasukkan
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
+        // Render ulang ikon setelah kartu dimasukkan
+        if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function refreshCurrentView() { renderDestinations(); }
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Render ikon navbar statis terlebih dahulu
         if (typeof lucide !== 'undefined') lucide.createIcons();
 
         const kategoriParam = getQueryParam('kategori');
