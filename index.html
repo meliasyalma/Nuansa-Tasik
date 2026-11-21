@@ -12,9 +12,11 @@
     <script>
         tailwind.config = { theme: { extend: { colors: { forest:'#123B35', emeraldNature:'#27866C', mintSoft:'#E9F4EF', amberWarm:'#F4B860', creamLight:'#FAF8F5' }, fontFamily: { heading:['Poppins','sans-serif'], sans:['Inter','sans-serif'] }, boxShadow: { 'soft':'0 10px 30px -5px rgba(18,59,53,0.08)', 'card':'0 20px 40px -15px rgba(18,59,53,0.12)' } } } };
     </script>
-    <!-- PERBAIKAN 1: Mengganti CDN Lucide ke versi stabil dan menambahkan defer -->
-    <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
-    <link rel="stylesheet" href="./syalma_style.css">
+    
+    <!-- PERBAIKAN 1: Mengganti CDN Lucide ke versi stabil (TANPA @latest) -->
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    
+    <link rel="stylesheet" href="css/syalma_style.css">
 </head>
 <body class="antialiased selection:bg-emeraldNature selection:text-white flex flex-col min-h-screen" data-page="home">
 
@@ -23,7 +25,6 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <a href="index.html" class="flex items-center gap-2.5 group text-left focus:outline-none">
             <div class="w-14 h-14 rounded-xl overflow-hidden justify-center shadow-md group-hover:scale-105 transition-transform">
-                <!-- Pastikan folder 'gambar' dan file 'gambar2.png' huruf kecil semua di GitHub -->
                 <img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="gambar2" alt="Logo Nuansa Tasikmalaya" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-6 h-6 text-forest stroke-[2.2]\'></i>'; if(typeof lucide !== \'undefined\') lucide.createIcons();">
             </div>
             <div>
@@ -205,7 +206,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
             <div>
                 <div class="flex items-center gap-2.5 mb-4">
-                    <div class="w-12 h-12 rounded-xl overflow-hidden  justify-center"><img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="gambar2" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-5 h-5 text-forest\'></i>'; if(typeof lucide !== \'undefined\') lucide.createIcons();"></div>
+                    <div class="w-12 h-12 rounded-xl overflow-hidden  justify-center"><img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="gambar2" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-5 h-5 text-forest\'></i>'; if(typeof lucide !== \'undefined\') lucide.createIcons();"></div>
                     <span class="font-heading font-bold text-xl">Nuansa <span class="text-amberWarm">Tasikmalaya</span></span>
                 </div>
                 <p class="text-mintSoft/80 text-sm leading-relaxed mb-5">Portal pariwisata digital Tasikmalaya.</p>
@@ -243,27 +244,20 @@
     </div>
 </footer>
 
-<script src="./main.js"></script>
+<script src="js/main.js"></script>
 <script>
     // ===== Home Page Script =====
     function renderHomePopular() {
         const grid = document.getElementById('home-popular-grid');
-        
-        // Pengecekan agar tidak error jika data belum termuat dari main.js
         if (typeof destinationsData !== 'undefined') {
             const popular = destinationsData.filter(d => d.popular).slice(0, 4);
-            
-            if (typeof createDestinationCard === 'function') {
-                grid.innerHTML = popular.map(createDestinationCard).join('');
-                
-                // PERBAIKAN 2: Render ikon setelah kartu destinasi dimasukkan ke HTML
-                if (typeof lucide !== 'undefined') {
-                    lucide.createIcons();
-                }
+            grid.innerHTML = popular.map(createDestinationCard).join('');
+            // PERBAIKAN 2: Render ulang ikon setelah kartu destinasi masuk
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
             }
         }
     }
-    
     function goSearch() {
         const q = document.getElementById('hero-search-input').value.trim();
         const cat = document.getElementById('hero-category-select').value;
@@ -272,13 +266,12 @@
         if (cat && cat !== 'Semua') params.set('kategori', cat);
         window.location.href = 'wisata.html' + (params.toString() ? '?' + params.toString() : '');
     }
-    
     function refreshCurrentView() { renderHomePopular(); }
 
     document.addEventListener('DOMContentLoaded', () => {
         renderHomePopular();
         
-        // Pastikan ikon di navbar dan bagian statis ter-render saat halaman dimuat
+        // PERBAIKAN 3: Pastikan ikon statis (navbar, kategori) ter-render saat halaman selesai dimuat
         setTimeout(() => {
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
