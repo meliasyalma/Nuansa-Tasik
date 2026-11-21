@@ -111,4 +111,58 @@
                         <p class="text-slate-500 text-sm flex items-start gap-2 mb-6"><i data-lucide="map-pin" class="w-4 h-4 text-emeraldNature shrink-0 mt-0.5"></i><span>${dest.address}</span></p>
                         <h3 class="font-heading font-bold text-lg text-forest mb-2">Deskripsi Wisata</h3>
                         <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-8">${dest.description}</p>
-                        <div class="grid sm:grid-cols-2 gap-6 pt-6 border-t
+                        <div class="grid sm:grid-cols-2 gap-6 pt-6 border-t border-slate-100">
+                            <div>
+                                <h4 class="font-heading font-bold text-forest text-base mb-3 flex items-center gap-2"><i data-lucide="sparkles" class="w-4 h-4 text-emeraldNature"></i> Daya Tarik Utama</h4>
+                                <ul class="space-y-2">${dest.attractions.map(a => `<li class="flex items-center gap-2.5 text-sm text-slate-600"><span class="w-2 h-2 rounded-full bg-emeraldNature"></span>${a}</li>`).join('')}</ul>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-bold text-forest text-base mb-3 flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-emeraldNature"></i> Fasilitas</h4>
+                                <ul class="space-y-2">${dest.facilities.map(f => `<li class="flex items-center gap-2.5 text-sm text-slate-600"><i data-lucide="check" class="w-4 h-4 text-emeraldNature"></i>${f}</li>`).join('')}</ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-4 space-y-6">
+                    <div id="realtime-weather-widget" class="bg-forest text-white rounded-3xl p-6 shadow-xl">
+                        <div class="flex items-center gap-3"><div class="w-6 h-6 border-2 border-amberWarm border-t-transparent rounded-full animate-spin"></div><span class="text-xs text-mintSoft">Memuat cuaca realtime...</span></div>
+                    </div>
+                    <div class="bg-white rounded-3xl p-6 shadow-soft border border-slate-100 space-y-4">
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-100"><span class="text-xs text-slate-500 font-medium">Harga Tiket</span><span class="font-heading text-xl font-bold text-emeraldNature">${formatRupiah(dest.price)}</span></div>
+                        <div><span class="text-xs text-slate-500 font-medium block mb-1">Jam Operasional</span><p class="text-sm font-semibold text-forest flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-emeraldNature"></i>${dest.hours}</p></div>
+                        <div><span class="text-xs text-slate-500 font-medium block mb-1">Koordinat GPS</span><p class="text-xs font-mono bg-creamLight px-3 py-2 rounded-xl text-slate-600">${dest.lat}, ${dest.lng}</p></div>
+                        <div class="pt-2 space-y-2.5">
+                            <a href="${gmapsUrl}" target="_blank" class="w-full py-3.5 px-4 rounded-2xl bg-forest hover:bg-emeraldNature text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-md"><i data-lucide="navigation" class="w-4 h-4 text-amberWarm"></i> Petunjuk Arah</a>
+                            <a href="peta.html" class="w-full py-3 px-4 rounded-2xl bg-mintSoft hover:bg-emeraldNature/20 text-forest font-semibold text-xs flex items-center justify-center gap-2"><i data-lucide="map" class="w-4 h-4"></i> Lihat di Peta Wisata</a>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        lucide.createIcons();
+        fetchWeather(dest.lat, dest.lng);
+    }
+
+    async function fetchWeather(lat, lng) {
+        const box = document.getElementById('realtime-weather-widget');
+        try {
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Asia%2FJakarta`;
+            const res = await fetch(url);
+            const data = await res.json();
+            const c = data.current;
+            const wmap = { 0:{l:'Cerah',i:'sun'},1:{l:'Cerah Berawan',i:'cloud-sun'},2:{l:'Berawan',i:'cloud-sun'},3:{l:'Mendung',i:'cloud'},45:{l:'Berkabut',i:'cloud-fog'},51:{l:'Gerimis',i:'cloud-drizzle'},61:{l:'Hujan',i:'cloud-rain'},63:{l:'Hujan Sedang',i:'cloud-rain'},80:{l:'Hujan Lokal',i:'cloud-rain'},95:{l:'Hujan Petir',i:'cloud-lightning'} };
+            const info = wmap[c.weather_code] || {l:'Sejuk',i:'cloud-sun'};
+            box.innerHTML = `<div class="flex items-center gap-3.5"><div class="w-12 h-12 rounded-2xl bg-amberWarm/20 text-amberWarm flex items-center justify-center"><i data-lucide="${info.i}" class="w-7 h-7"></i></div><div><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span class="text-[11px] uppercase tracking-wider text-mintSoft/80 font-semibold">Cuaca Realtime</span></div><p class="font-heading text-2xl font-bold text-white mt-0.5">${Math.round(c.temperature_2m)}°C <span class="text-sm font-normal text-mintSoft">• ${info.l}</span></p></div></div><div class="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-white/15 text-xs text-mintSoft/90"><div class="flex items-center gap-1.5"><i data-lucide="droplets" class="w-3.5 h-3.5 text-amberWarm"></i> Kelembapan: <strong>${c.relative_humidity_2m}%</strong></div><div class="flex items-center gap-1.5"><i data-lucide="wind" class="w-3.5 h-3.5 text-amberWarm"></i> Angin: <strong>${c.wind_speed_10m} km/j</strong></div></div>`;
+            lucide.createIcons();
+        } catch(e) { box.innerHTML = '<p class="text-xs text-mintSoft">Cuaca sejuk (24-29°C).</p>'; }
+    }
+
+    function refreshCurrentView() { if (currentDest) renderDetailPage(currentDest.id); }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const id = getQueryParam('id');
+        if (!id) { window.location.href = 'wisata.html'; return; }
+        renderDetailPage(id);
+    });
+</script>
+</body>
+</html>
