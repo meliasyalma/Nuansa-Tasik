@@ -457,3 +457,176 @@ footer ul li { margin-bottom: 0.6rem; }
   .footer-grid { grid-template-columns: 1fr; }
   .section { padding: 3.5rem 0; }
 }
+
+/* ============ RESPONSIVE TAILWIND PAGES ============ */
+@media (max-width: 1024px) {
+  #navbar .max-w-7xl {
+    width: 100%;
+  }
+
+  #mobile-menu {
+    max-height: calc(100vh - 76px);
+    overflow-y: auto;
+  }
+
+  #map,
+  .leaflet-container {
+    height: 420px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    min-width: 0;
+  }
+
+  #navbar {
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+  }
+
+  #navbar > div:first-child {
+    min-height: 48px;
+  }
+
+  #navbar a > div:last-child {
+    max-width: 180px;
+  }
+
+  #navbar img {
+    width: 44px;
+    height: 44px;
+  }
+
+  main.flex-grow {
+    width: 100%;
+  }
+
+  main.flex-grow.pt-28 {
+    padding-top: 6.5rem;
+  }
+
+  .hero,
+  section.relative.min-h-\[92vh\] {
+    min-height: 680px;
+  }
+
+  .hero-search,
+  #favorites-modal > div,
+  [id$="-modal"] > div {
+    width: 100%;
+  }
+
+  #toast-notification {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  #toast-notification > div {
+    width: 100%;
+  }
+
+  #map,
+  .leaflet-container {
+    height: 360px !important;
+  }
+
+  .gallery,
+  .card-grid,
+  .artikel-grid,
+  .kuliner-grid,
+  .planner-grid,
+  .kontak-grid,
+  .detail-grid,
+  .map-layout,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-img,
+  .artikel-img {
+    height: 200px;
+  }
+
+  footer {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container,
+  #navbar .max-w-7xl,
+  main .max-w-7xl,
+  footer .max-w-7xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #navbar a > div:last-child {
+    max-width: 145px;
+  }
+
+  #navbar a > div:last-child span:first-child {
+    font-size: 0.9rem;
+  }
+
+  #navbar a > div:last-child span:last-child {
+    display: none;
+  }
+
+  #navbar button {
+    padding: 0.55rem;
+  }
+
+  #navbar .w-14,
+  #navbar .w-11 {
+    width: 38px;
+    height: 38px;
+  }
+
+  #navbar img {
+    width: 38px;
+    height: 38px;
+  }
+
+  h1 {
+    overflow-wrap: anywhere;
+  }
+
+  .section {
+    padding: 2.5rem 0;
+  }
+
+  #map,
+  .leaflet-container {
+    height: 300px !important;
+  }
+
+  .sort-bar {
+    width: 100%;
+  }
+
+  .sort-bar select,
+  .search-box,
+  .search-box input {
+    width: 100%;
+  }
+
+  .filter-bar {
+    justify-content: flex-start;
+  }
+
+  .filter-btn {
+    flex: 1 1 calc(50% - 0.75rem);
+  }
+
+  [id$="-modal"] {
+    padding: 0.75rem;
+  }
+
+  [id$="-modal"] > div {
+    max-height: calc(100vh - 1.5rem);
+    border-radius: 1.25rem;
+  }
+}
