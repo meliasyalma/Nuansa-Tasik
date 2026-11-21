@@ -267,30 +267,20 @@
 
 <script src="js/main.js"></script>
 <script>
-    function renderIconsSafe() {
+    function renderIconsNow() {
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
             window.lucide.createIcons();
         }
     }
 
-    function handleImageFallback(imgEl, iconName) {
-        if (!imgEl || !imgEl.parentElement) return;
-        imgEl.style.display = 'none';
-        if (!imgEl.parentElement.querySelector('[data-fallback-icon]')) {
-            const span = document.createElement('span');
-            span.setAttribute('data-fallback-icon', 'true');
-            span.className = 'text-amberWarm font-bold text-xs';
-            span.textContent = iconName === 'compass' ? 'NT' : 'IMG';
-            imgEl.parentElement.appendChild(span);
-        }
-    }
-
     function renderHomePopular() {
         const grid = document.getElementById('home-popular-grid');
-        if (!grid || typeof destinationsData === 'undefined' || typeof createDestinationCard !== 'function') return;
-        const popular = destinationsData.filter(d => d.popular).slice(0, 4);
-        grid.innerHTML = popular.map(createDestinationCard).join('');
-        renderIconsSafe();
+        if (!grid) return;
+        if (typeof destinationsData !== 'undefined' && typeof createDestinationCard === 'function') {
+            const popular = destinationsData.filter(d => d.popular).slice(0, 4);
+            grid.innerHTML = popular.map(createDestinationCard).join('');
+        }
+        renderIconsNow();
     }
 
     function goSearch() {
@@ -308,12 +298,6 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         renderHomePopular();
-        renderIconsSafe();
-    });
-
-    window.addEventListener('load', () => {
-        renderIconsSafe();
+        renderIconsNow();
     });
 </script>
-</body>
-</html>
