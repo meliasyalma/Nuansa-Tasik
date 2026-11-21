@@ -13,6 +13,12 @@
         tailwind.config = { theme: { extend: { colors: { forest:'#123B35', emeraldNature:'#27866C', mintSoft:'#E9F4EF', amberWarm:'#F4B860', creamLight:'#FAF8F5' }, fontFamily: { heading:['Poppins','sans-serif'], sans:['Inter','sans-serif'] }, boxShadow: { 'soft':'0 10px 30px -5px rgba(18,59,53,0.08)', 'card':'0 20px 40px -15px rgba(18,59,53,0.12)' } } } };
     </script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Menghapus link css/syalma_style.css karena file tidak ada, dan menaruh CSS animasi di sini -->
+    <style>
+        @keyframes heroBg { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .animate-hero-bg { animation: heroBg 20s ease-in-out infinite; }
+        .reveal { opacity: 1; transform: translateY(0); transition: opacity .8s ease, transform .8s ease; }
+    </style>
 </head>
 <body class="antialiased selection:bg-emeraldNature selection:text-white flex flex-col min-h-screen" data-page="home">
 
@@ -21,6 +27,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <a href="index.html" class="flex items-center gap-2.5 group text-left focus:outline-none">
             <div class="w-14 h-14 rounded-xl overflow-hidden justify-center shadow-md group-hover:scale-105 transition-transform">
+                <!-- Gambar Asli Kamu -->
                 <img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="Logo Nuansa Tasikmalaya" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-6 h-6 text-forest stroke-[2.2]\'></i>'; lucide.createIcons();">
             </div>
             <div>
@@ -62,6 +69,7 @@
     <!-- HERO -->
     <section class="relative min-h-[92vh] flex items-center justify-center overflow-hidden bg-forest">
         <div class="absolute inset-0 z-0 overflow-hidden">
+            <!-- Gambar Asli Kamu -->
             <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80" alt="Panorama Alam Tasikmalaya" class="w-full h-full object-cover animate-hero-bg opacity-70">
             <div class="absolute inset-0 bg-gradient-to-b from-forest/80 via-forest/55 to-forest/95"></div>
         </div>
@@ -103,7 +111,9 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center reveal">
                 <div class="relative">
                     <div class="grid grid-cols-2 gap-4">
+                        <!-- Gambar Asli Kamu -->
                         <img src="https://i.pinimg.com/1200x/ae/9b/c0/ae9bc0ec3386f3e83662cd01c7b07dae.jpg" alt="Alam" class="rounded-3xl h-64 sm:h-80 w-full object-cover shadow-card">
+                        <!-- Gambar Asli Kamu -->
                         <img src="https://i.pinimg.com/736x/3c/2e/48/3c2e4888214db717cb3c73c594dd81b0.jpg" alt="Pantai" class="rounded-3xl h-64 sm:h-80 w-full object-cover shadow-card mt-8">
                     </div>
                     <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-forest text-white px-6 py-4 rounded-2xl shadow-xl flex items-center gap-3 w-max">
@@ -203,6 +213,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
             <div>
                 <div class="flex items-center gap-2.5 mb-4">
+                    <!-- Gambar Asli Kamu -->
                     <div class="w-12 h-12 rounded-xl overflow-hidden  justify-center"><img src="https://i.ibb.co.com/chTZXvHs/gambar2.png" alt="Logo Nuansa Tasikmalaya" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-5 h-5 text-forest\'></i>'; lucide.createIcons();"></div>
                     <span class="font-heading font-bold text-xl">Nuansa <span class="text-amberWarm">Tasikmalaya</span></span>
                 </div>
