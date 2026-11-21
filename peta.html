@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Wisata - Nuansa Tasikmalaya</title>
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { forest:'#123B35', emeraldNature:'#27866C', mintSoft:'#E9F4EF', amberWarm:'#F4B860', creamLight:'#FAF8F5' }, fontFamily: { heading:['Poppins','sans-serif'], sans:['Inter','sans-serif'] }, boxShadow: { 'soft':'0 10px 30px -5px rgba(18,59,53,0.08)', 'card':'0 20px 40px -15px rgba(18,59,53,0.12)' } } } };</script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased selection:bg-emeraldNature selection:text-white flex flex-col min-h-screen" data-page="peta">
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-white py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5 group"><div class="w-14 h-14 rounded-xl overflow-hidden justify-center shadow-md"><img src="gambar/gambar2.png" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-6 h-6 text-forest\'></i>'; lucide.createIcons();"></div><div><span class="font-heading font-bold text-xl tracking-tight block leading-none">Wisata<span class="text-amberWarm">Kita</span></span><span class="text-[11px] uppercase tracking-widest opacity-85 font-medium">Tasikmalaya</span></div></a>
+        <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+            <a href="index.html" data-nav="home" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Home</a>
+            <a href="wisata.html" data-nav="destinasi" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Destinasi</a>
+            <a href="peta.html" data-nav="peta" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Peta</a>
+            <a href="trip-planner.html" data-nav="planner" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Planner</a>
+            <a href="kuliner.html" data-nav="kuliner" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Kuliner</a>
+            <a href="artikel.html" data-nav="artikel" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Artikel</a>
+            <a href="kontak.html" data-nav="kontak" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Kontak</a>
+        </nav>
+        <div class="flex items-center gap-2.5">
+            <button onclick="toggleFavoritesModal()" class="relative p-2.5 rounded-xl bg-white/15 hover:bg-white/25 flex items-center gap-1.5"><i data-lucide="heart" class="w-5 h-5 text-amberWarm fill-amberWarm"></i><span class="hidden sm:inline text-xs font-semibold">Favorit</span><span id="fav-badge" class="ml-0.5 px-1.5 py-0.5 text-[11px] font-bold rounded-full bg-amberWarm text-forest">0</span></button>
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-white/15"><i data-lucide="menu" class="w-6 h-6"></i></button>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-forest text-white border-t border-white/10 mt-3 px-4 pt-3 pb-6 shadow-2xl">
+        <div class="flex flex-col space-y-1.5">
+            <a href="index.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Home</a>
+            <a href="wisata.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Destinasi</a>
+            <a href="peta.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Peta</a>
+            <a href="trip-planner.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Planner</a>
+            <a href="kuliner.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Kuliner</a>
+            <a href="artikel.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Artikel</a>
+            <a href="kontak.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Kontak</a>
+        </div>
+    </div>
+</header>
+
+<main class="flex-grow pt-28 pb-20 bg-creamLight min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+                <span class="text-emeraldNature font-semibold text-xs uppercase tracking-widest">Navigasi Geografis</span>
+                <h1 class="font-heading text-3xl sm:text-4xl font-bold text-forest mt-1">Peta Interaktif Wisata Tasikmalaya</h1>
+                <p class="text-slate-600 text-sm mt-1">Klik marker pada peta atau pilih lokasi di panel samping.</p>
+            </div>
+            <button onclick="resetMapCenter()" class="px-4 py-2.5 rounded-xl bg-forest text-white text-xs font-semibold hover:bg-emeraldNature flex items-center gap-2 shadow-sm"><i data-lucide="locate-fixed" class="w-4 h-4"></i> Pusatkan Peta</button>
+        </div>
+        <div class="grid lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-4 bg-white rounded-3xl p-5 shadow-soft border border-slate-100 max-h-[600px] overflow-y-auto">
+                <h3 class="font-heading font-bold text-forest text-base mb-4 flex items-center gap-2"><i data-lucide="map-pin" class="w-5 h-5 text-emeraldNature"></i> Daftar Titik Destinasi</h3>
+                <div id="map-sidebar-list" class="space-y-3"></div>
+            </div>
+            <div class="lg:col-span-8 bg-white rounded-3xl p-3 shadow-card border border-slate-100">
+                <div id="interactive-map" class="w-full h-[460px] sm:h-[575px] rounded-2xl z-10"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div id="favorites-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-forest/70 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl max-h-[85vh] flex flex-col">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100"><div class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-xl bg-mintSoft text-emeraldNature flex items-center justify-center"><i data-lucide="heart" class="w-5 h-5 fill-emeraldNature"></i></div><h3 class="font-heading font-bold text-lg text-forest">Favorit</h3></div><button onclick="toggleFavoritesModal()" class="p-2 rounded-xl hover:bg-slate-100 text-slate-500"><i data-lucide="x" class="w-5 h-5"></i></button></div>
+        <div id="favorites-list-container" class="py-4 overflow-y-auto space-y-3 flex-grow"></div>
+    </div>
+</div>
+<div id="toast-notification" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-forest text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-white/15 flex items-center gap-3"><div class="w-8 h-8 rounded-xl bg-amberWarm text-forest flex items-center justify-center shrink-0"><i data-lucide="check-circle-2" class="w-5 h-5"></i></div><p id="toast-message" class="text-xs sm:text-sm font-medium">OK</p></div>
+</div>
+<footer class="bg-forest text-white pt-16 pb-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+            <div><div class="flex items-center gap-2.5 mb-4"><div class="w-10 h-10 rounded-xl overflow-hidden bg-amberWarm flex items-center justify-center"><img src="assets/img/logo.png" alt="Logo" class="w-full h-full object-contain p-1"></div><span class="font-heading font-bold text-xl">Wisata<span class="text-amberWarm">Kita</span></span></div><p class="text-mintSoft/80 text-sm">Portal pariwisata digital Tasikmalaya.</p></div>
+            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Eksplorasi</h4><ul class="space-y-2.5 text-sm text-mintSoft/80"><li><a href="index.html" class="hover:text-amberWarm">Beranda</a></li><li><a href="wisata.html" class="hover:text-amberWarm">Destinasi</a></li><li><a href="peta.html" class="hover:text-amberWarm">Peta</a></li><li><a href="trip-planner.html" class="hover:text-amberWarm">Planner</a></li></ul></div>
+            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Ragam</h4><ul class="space-y-2.5 text-sm text-mintSoft/80"><li><a href="wisata.html?kategori=Pegunungan" class="hover:text-amberWarm">Pegunungan</a></li><li><a href="wisata.html?kategori=Pantai" class="hover:text-amberWarm">Pantai</a></li><li><a href="kuliner.html" class="hover:text-amberWarm">Kuliner</a></li><li><a href="artikel.html" class="hover:text-amberWarm">Artikel</a></li></ul></div>
+            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Layanan</h4><ul class="space-y-3 text-sm text-mintSoft/80"><li>Jl. KHZ. Mustofa No. 124</li><li>nuansatasik@nuansatasik.id</li></ul></div>
+        </div>
+        <div class="pt-8 text-center text-xs text-mintSoft/60">&copy; 2026 Nuansa Tasikmalaya.</div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+    // ===== Peta Page Script =====
+    let leafletMap = null;
+    let mapMarkers = {};
+
+    function initInteractiveMap() {
+        if (!leafletMap) {
+            leafletMap = L.map('interactive-map').setView([-7.48, 108.13], 10);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(leafletMap);
+            const icon = L.divIcon({ className: 'custom-map-pin', html: `<div style="background:#123B35;color:#F4B860;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,0.3);font-weight:bold;">📍</div>`, iconSize: [34,34], iconAnchor: [17,34], popupAnchor: [0,-32] });
+            destinationsData.forEach(dest => {
+                const gmaps = `https://www.google.com/maps/dir/?api=1&destination=${dest.lat},${dest.lng}`;
+                const popup = `<div style="width:210px"><img src="${dest.image}" alt="${dest.name}" style="width:100%;height:105px;object-fit:cover;border-radius:10px;margin-bottom:8px"><span style="font-size:10px;font-weight:700;color:#27866C;text-transform:uppercase">${dest.category}</span><h4 style="font-weight:700;color:#123B35;margin:2px 0 4px;font-size:14px">${dest.name}</h4><p style="font-size:11px;color:#64748b;margin-bottom:8px">${dest.district}</p><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-weight:700;color:#27866C;font-size:13px">${formatRupiah(dest.price)}</span><a href="${gmaps}" target="_blank" style="font-size:10px;background:#123B35;color:#fff;padding:4px 8px;border-radius:6px;text-decoration:none;font-weight:600">Rute</a></div><a href="detail-wisata.html?id=${dest.id}" style="display:block;text-align:center;background:#F4B860;color:#123B35;font-weight:700;font-size:11px;padding:6px;border-radius:8px;text-decoration:none">Lihat Detail</a></div>`;
+                const m = L.marker([dest.lat, dest.lng], { icon }).addTo(leafletMap).bindPopup(popup);
+                mapMarkers[dest.id] = m;
+            });
+        }
+        const sidebar = document.getElementById('map-sidebar-list');
+        sidebar.innerHTML = destinationsData.map(dest => `<div onclick="focusDest('${dest.id}')" class="cursor-pointer p-3 rounded-2xl hover:bg-mintSoft border border-transparent hover:border-emeraldNature/20"><div class="flex items-start gap-3"><img src="${dest.image}" alt="${dest.name}" class="w-14 h-14 rounded-xl object-cover shrink-0"><div class="flex-grow min-w-0"><span class="text-[10px] font-bold text-emeraldNature uppercase">${dest.category}</span><h4 class="font-heading font-bold text-forest text-sm truncate">${dest.name}</h4><p class="text-xs text-slate-500 truncate">${dest.district}</p><p class="text-xs font-bold text-emeraldNature mt-1">${formatRupiah(dest.price)}</p></div></div></div>`).join('');
+        setTimeout(() => leafletMap.invalidateSize(), 200);
+    }
+
+    function focusDest(id) {
+        const d = destinationsData.find(x => x.id === id);
+        const m = mapMarkers[id];
+        if (d && m && leafletMap) { leafletMap.setView([d.lat, d.lng], 14, { animate: true }); m.openPopup(); }
+    }
+    function resetMapCenter() { if (leafletMap) { leafletMap.setView([-7.48, 108.13], 10, { animate: true }); leafletMap.closePopup(); } }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initInteractiveMap, 150);
+    });
+</script>
+</body>
+</html>

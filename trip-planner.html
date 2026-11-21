@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner - Nuansa Tasikmalaya</title>
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { forest:'#123B35', emeraldNature:'#27866C', mintSoft:'#E9F4EF', amberWarm:'#F4B860', creamLight:'#FAF8F5' }, fontFamily: { heading:['Poppins','sans-serif'], sans:['Inter','sans-serif'] }, boxShadow: { 'soft':'0 10px 30px -5px rgba(18,59,53,0.08)', 'card':'0 20px 40px -15px rgba(18,59,53,0.12)' } } } };</script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased selection:bg-emeraldNature selection:text-white flex flex-col min-h-screen" data-page="planner">
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-white py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5 group"><div class="w-14 h-14 rounded-xl overflow-hidden justify-center shadow-md"><img src="gambar/gambar2.png" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-6 h-6 text-forest\'></i>'; lucide.createIcons();"></div><div><span class="font-heading font-bold text-xl tracking-tight block leading-none">Wisata<span class="text-amberWarm">Kita</span></span><span class="text-[11px] uppercase tracking-widest opacity-85 font-medium">Tasikmalaya</span></div></a>
+        <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+            <a href="index.html" data-nav="home" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Home</a>
+            <a href="wisata.html" data-nav="destinasi" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Destinasi</a>
+            <a href="peta.html" data-nav="peta" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Peta</a>
+            <a href="trip-planner.html" data-nav="planner" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Planner</a>
+            <a href="kuliner.html" data-nav="kuliner" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Kuliner</a>
+            <a href="artikel.html" data-nav="artikel" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Artikel</a>
+            <a href="kontak.html" data-nav="kontak" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium hover:bg-white/15">Kontak</a>
+        </nav>
+        <div class="flex items-center gap-2.5">
+            <button onclick="toggleFavoritesModal()" class="relative p-2.5 rounded-xl bg-white/15 hover:bg-white/25 flex items-center gap-1.5"><i data-lucide="heart" class="w-5 h-5 text-amberWarm fill-amberWarm"></i><span class="hidden sm:inline text-xs font-semibold">Favorit</span><span id="fav-badge" class="ml-0.5 px-1.5 py-0.5 text-[11px] font-bold rounded-full bg-amberWarm text-forest">0</span></button>
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-white/15"><i data-lucide="menu" class="w-6 h-6"></i></button>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-forest text-white border-t border-white/10 mt-3 px-4 pt-3 pb-6 shadow-2xl">
+        <div class="flex flex-col space-y-1.5">
+            <a href="index.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Home</a>
+            <a href="wisata.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Destinasi</a>
+            <a href="peta.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Peta</a>
+            <a href="trip-planner.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Planner</a>
+            <a href="kuliner.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Kuliner</a>
+            <a href="artikel.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Artikel</a>
+            <a href="kontak.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10">Kontak</a>
+        </div>
+    </div>
+</header>
+
+<main class="flex-grow pt-28 pb-20 bg-creamLight min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-10">
+            <span class="text-emeraldNature font-semibold text-xs uppercase tracking-widest">Perencana Cerdas</span>
+            <h1 class="font-heading text-3xl sm:text-4xl font-bold text-forest mt-1">Trip Planner & Estimasi Anggaran</h1>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">Susun rencana kunjungan wisata dan hitung perkiraan biaya otomatis.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-soft border border-slate-100">
+                    <h2 class="font-heading font-bold text-forest text-lg mb-5 flex items-center gap-2"><span class="w-7 h-7 rounded-lg bg-emeraldNature text-white text-xs flex items-center justify-center">1</span> Detail Perjalanan Anda</h2>
+                    <div class="grid sm:grid-cols-3 gap-4">
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1.5">Nama Trip</label><input type="text" id="trip-name" value="Liburan Akhir Pekan Tasik" oninput="calculateTripBudget()" class="w-full px-4 py-2.5 rounded-xl bg-creamLight border border-slate-200 text-sm focus:border-emeraldNature focus:outline-none"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1.5">Durasi (Hari)</label><input type="number" id="trip-days" min="1" max="14" value="2" oninput="calculateTripBudget()" class="w-full px-4 py-2.5 rounded-xl bg-creamLight border border-slate-200 text-sm focus:border-emeraldNature focus:outline-none"></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1.5">Peserta (Orang)</label><input type="number" id="trip-people" min="1" max="50" value="2" oninput="calculateTripBudget()" class="w-full px-4 py-2.5 rounded-xl bg-creamLight border border-slate-200 text-sm focus:border-emeraldNature focus:outline-none"></div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4 mt-4">
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1.5">Akomodasi</label><select id="trip-hotel-tier" onchange="calculateTripBudget()" class="w-full px-4 py-2.5 rounded-xl bg-creamLight border border-slate-200 text-sm focus:outline-none"><option value="0">Tanpa Menginap</option><option value="250000" selected>Homestay (Rp 250rb/malam)</option><option value="550000">Hotel Bintang 3 (Rp 550rb/malam)</option><option value="950000">Resort (Rp 950rb/malam)</option></select></div>
+                        <div><label class="block text-xs font-semibold text-slate-600 mb-1.5">Transportasi</label><select id="trip-transport-tier" onchange="calculateTripBudget()" class="w-full px-4 py-2.5 rounded-xl bg-creamLight border border-slate-200 text-sm focus:outline-none"><option value="75000">Kendaraan Pribadi (Rp 75rb/hari)</option><option value="350000" selected>Sewa Mobil (Rp 350rb/hari)</option><option value="150000">Transportasi Umum (Rp 150rb/hari)</option></select></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-soft border border-slate-100">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+                        <h2 class="font-heading font-bold text-forest text-lg flex items-center gap-2"><span class="w-7 h-7 rounded-lg bg-emeraldNature text-white text-xs flex items-center justify-center">2</span> Daftar Kunjungan</h2>
+                        <div class="flex gap-2">
+                            <select id="planner-dest-select" class="px-3.5 py-2 rounded-xl bg-mintSoft text-forest text-xs sm:text-sm font-medium focus:outline-none max-w-[200px]"></select>
+                            <button onclick="addDestinationToPlanner()" class="px-4 py-2 rounded-xl bg-emeraldNature hover:bg-forest text-white text-xs sm:text-sm font-semibold flex items-center gap-1.5 shrink-0"><i data-lucide="plus" class="w-4 h-4"></i> Tambah</button>
+                        </div>
+                    </div>
+                    <div id="planner-itinerary-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5">
+                <div class="bg-forest text-white rounded-3xl p-6 sm:p-8 shadow-2xl sticky top-28">
+                    <div class="flex items-center justify-between border-b border-white/15 pb-4 mb-6">
+                        <div><span class="text-amberWarm text-xs font-semibold uppercase tracking-wider">Ringkasan</span><h3 id="summary-trip-title" class="font-heading text-xl font-bold mt-0.5">Liburan Akhir Pekan</h3></div>
+                        <div class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center text-amberWarm"><i data-lucide="wallet" class="w-6 h-6"></i></div>
+                    </div>
+                    <div class="space-y-3.5 text-sm mb-6">
+                        <div class="flex justify-between text-mintSoft/85"><span>Tiket (<span id="sum-people">2</span> org)</span><span id="cost-tickets" class="font-semibold text-white">Rp 0</span></div>
+                        <div class="flex justify-between text-mintSoft/85"><span>Konsumsi</span><span id="cost-food" class="font-semibold text-white">Rp 0</span></div>
+                        <div class="flex justify-between text-mintSoft/85"><span>Transportasi (<span id="sum-days">2</span> hari)</span><span id="cost-transport" class="font-semibold text-white">Rp 0</span></div>
+                        <div class="flex justify-between text-mintSoft/85"><span>Akomodasi</span><span id="cost-hotel" class="font-semibold text-white">Rp 0</span></div>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/10 border border-white/15 mb-6">
+                        <div class="flex justify-between items-center"><span class="text-xs uppercase tracking-wider text-mintSoft">Total</span><span id="cost-total" class="font-heading text-2xl sm:text-3xl font-extrabold text-amberWarm">Rp 0</span></div>
+                        <p class="text-[11px] text-mintSoft/70 mt-1 text-right">Per orang: <span id="cost-per-person">Rp 0</span></p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="saveTripPlan()" class="py-3.5 px-4 rounded-2xl bg-amberWarm hover:bg-amberWarm/90 text-forest font-bold text-sm flex items-center justify-center gap-2 shadow-lg"><i data-lucide="save" class="w-4 h-4"></i> Simpan</button>
+                        <button onclick="clearTripPlan()" class="py-3.5 px-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm flex items-center justify-center gap-2"><i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div id="favorites-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-forest/70 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl max-h-[85vh] flex flex-col"><div class="flex items-center justify-between pb-4 border-b border-slate-100"><div class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-xl bg-mintSoft text-emeraldNature flex items-center justify-center"><i data-lucide="heart" class="w-5 h-5 fill-emeraldNature"></i></div><h3 class="font-heading font-bold text-lg text-forest">Favorit</h3></div><button onclick="toggleFavoritesModal()" class="p-2 rounded-xl hover:bg-slate-100 text-slate-500"><i data-lucide="x" class="w-5 h-5"></i></button></div><div id="favorites-list-container" class="py-4 overflow-y-auto space-y-3 flex-grow"></div></div>
+</div>
+<div id="toast-notification" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none"><div class="bg-forest text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-white/15 flex items-center gap-3"><div class="w-8 h-8 rounded-xl bg-amberWarm text-forest flex items-center justify-center shrink-0"><i data-lucide="check-circle-2" class="w-5 h-5"></i></div><p id="toast-message" class="text-xs sm:text-sm font-medium">OK</p></div></div>
+<footer class="bg-forest text-white pt-16 pb-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+            <div><div class="flex items-center gap-2.5 mb-4"><div class="w-10 h-10 rounded-xl overflow-hidden bg-amberWarm flex items-center justify-center"><img src="assets/img/logo.png" alt="Logo" class="w-full h-full object-contain p-1"></div><span class="font-heading font-bold text-xl">Wisata<span class="text-amberWarm">Kita</span></span></div><p class="text-mintSoft/80 text-sm">Portal pariwisata digital Tasikmalaya.</p></div>
+            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Eksplorasi</h4><ul class="space-y-2.5 text-sm text-mintSoft/80"><li><a href="index.html" class="hover:text-amberWarm">Beranda</a></li><li><a href="wisata.html" class="hover:text-amberWarm">Destinasi</a></li><li><a href="peta.html" class="hover:text-amberWarm">Peta</a></li><li><a href="trip-planner.html" class="hover:text-amberWarm">Planner</a></li></ul></div>
+            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Ragam</h4><ul class="space-y-2.5 text-sm text-mintSoft/80"><li><a href="wisata.html?kategori=Pegunungan" class="hover:text-amberWarm">Pegunungan</a></li><li><a href="wisata.html?kategori=Pantai" class="hover:text-amberWarm">Pantai</a></li><li><a href="kuliner.html" class="hover:text-amberWarm">Kuliner</a></li><li><a href="artikel.html" class="hover:text-amberWarm">Artikel</a></li></ul></div>
+            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Layanan</h4><ul class="space-y-3 text-sm text-mintSoft/80"><li>Jl. KHZ. Mustofa No. 124</li><li>nuansatasik@nuansatasik.id
+</li></ul></div>
+        </div>
+        <div class="pt-8 text-center text-xs text-mintSoft/60">&copy; 2026 Nuansa Tasikmalaya.</div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+    // ===== Trip Planner Script =====
+    function renderPlannerPage() {
+        const select = document.getElementById('planner-dest-select');
+        if (select.options.length <= 1) {
+            select.innerHTML = '<option value="">Pilih destinasi...</option>' + destinationsData.map(d => `<option value="${d.id}">${d.name} - ${formatRupiah(d.price)}</option>`).join('');
+        }
+        renderPlannerItinerary();
+        calculateTripBudget();
+    }
+
+    function renderPlannerItinerary() {
+        const c = document.getElementById('planner-itinerary-list');
+        if (plannerItems.length === 0) {
+            c.innerHTML = `<div class="text-center py-8 bg-creamLight rounded-2xl border-2 border-dashed border-slate-200"><i data-lucide="map-pin-off" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i><p class="text-sm text-slate-500">Belum ada destinasi dipilih.</p></div>`;
+            lucide.createIcons(); return;
+        }
+        c.innerHTML = plannerItems.map((id, idx) => {
+            const d = destinationsData.find(x => x.id === id);
+            if (!d) return '';
+            return `<div class="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-creamLight border border-slate-200"><div class="flex items-center gap-3 flex-grow min-w-0"><span class="w-7 h-7 rounded-lg bg-emeraldNature text-white text-xs font-bold flex items-center justify-center shrink-0">${idx+1}</span><img src="${d.image}" class="w-12 h-12 rounded-xl object-cover shrink-0"><div class="min-w-0"><h4 class="font-heading font-bold text-forest text-sm truncate">${d.name}</h4><p class="text-xs text-slate-500 truncate">${d.district}</p></div></div><div class="flex items-center gap-2 shrink-0"><span class="text-sm font-bold text-emeraldNature">${formatRupiah(d.price)}</span><button onclick="removeDestinationFromPlanner('${id}')" class="p-2 rounded-lg bg-red-50 text-red-500 hover:bg-red-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div></div>`;
+        }).join('');
+        lucide.createIcons();
+    }
+
+    function addDestinationToPlanner() {
+        const id = document.getElementById('planner-dest-select').value;
+        if (!id) return showToast('Pilih destinasi dulu.');
+        if (plannerItems.includes(id)) return showToast('Sudah ada di daftar.');
+        plannerItems.push(id);
+        localStorage.setItem('Nuansa Tasikmalaya_planner', JSON.stringify(plannerItems));
+        renderPlannerItinerary(); calculateTripBudget();
+        document.getElementById('planner-dest-select').value = '';
+        showToast('Ditambahkan!');
+    }
+    function removeDestinationFromPlanner(id) {
+        plannerItems = plannerItems.filter(x => x !== id);
+        localStorage.setItem('Nuansa Tasikmalaya_planner', JSON.stringify(plannerItems));
+        renderPlannerItinerary(); calculateTripBudget();
+    }
+    function calculateTripBudget() {
+        const days = Math.max(1, parseInt(document.getElementById('trip-days')?.value) || 1);
+        const people = Math.max(1, parseInt(document.getElementById('trip-people')?.value) || 1);
+        const hotel = parseInt(document.getElementById('trip-hotel-tier')?.value) || 0;
+        const transport = parseInt(document.getElementById('trip-transport-tier')?.value) || 0;
+        const name = document.getElementById('trip-name')?.value || 'Rencana';
+        let tickets = 0;
+        plannerItems.forEach(id => { const d = destinationsData.find(x => x.id === id); if (d) tickets += d.price; });
+        tickets *= people;
+        const food = 75000 * people * days;
+        const trans = transport * days;
+        const nights = Math.max(0, days - 1);
+        const rooms = Math.ceil(people / 2);
+        const hotelTotal = hotel * rooms * nights;
+        const total = tickets + food + trans + hotelTotal;
+        document.getElementById('summary-trip-title').textContent = name;
+        document.getElementById('sum-people').textContent = people;
+        document.getElementById('sum-days').textContent = days;
+        document.getElementById('cost-tickets').textContent = formatRupiah(tickets);
+        document.getElementById('cost-food').textContent = formatRupiah(food);
+        document.getElementById('cost-transport').textContent = formatRupiah(trans);
+        document.getElementById('cost-hotel').textContent = formatRupiah(hotelTotal);
+        document.getElementById('cost-total').textContent = formatRupiah(total);
+        document.getElementById('cost-per-person').textContent = formatRupiah(Math.round(total / people));
+    }
+    function saveTripPlan() {
+        if (plannerItems.length === 0) return showToast('Tambahkan minimal 1 destinasi.');
+        const plan = { name: document.getElementById('trip-name').value, destinations: [...plannerItems], days: parseInt(document.getElementById('trip-days').value), people: parseInt(document.getElementById('trip-people').value), savedAt: new Date().toISOString() };
+        const saved = JSON.parse(localStorage.getItem('Nuansa Tasikmalaya_saved_trips') || '[]');
+        saved.push(plan);
+        localStorage.setItem('Nuansa Tasikmalaya_saved_trips', JSON.stringify(saved));
+        showToast('Rencana disimpan!');
+    }
+    function clearTripPlan() {
+        if (!confirm('Reset semua?')) return;
+        plannerItems = [];
+        localStorage.setItem('Nuansa Tasikmalaya_planner', JSON.stringify(plannerItems));
+        document.getElementById('trip-name').value = 'Liburan Akhir Pekan Tasik';
+        document.getElementById('trip-days').value = 2;
+        document.getElementById('trip-people').value = 2;
+        renderPlannerItinerary(); calculateTripBudget();
+        showToast('Reset selesai.');
+    }
+    function refreshCurrentView() { renderPlannerItinerary(); }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const addId = getQueryParam('add');
+        if (addId && destinationsData.find(d => d.id === addId) && !plannerItems.includes(addId)) {
+            plannerItems.push(addId);
+            localStorage.setItem('Nuansa Tasikmalaya_planner', JSON.stringify(plannerItems));
+            setTimeout(() => showToast('Destinasi ditambahkan ke planner!'), 500);
+        }
+        renderPlannerPage();
+    });
+</script>
+</body>
+</html>

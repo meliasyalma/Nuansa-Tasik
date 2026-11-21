@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinasi Wisata - Nuansa Tasikmalaya</title>
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { forest:'#123B35', emeraldNature:'#27866C', mintSoft:'#E9F4EF', amberWarm:'#F4B860', creamLight:'#FAF8F5' }, fontFamily: { heading:['Poppins','sans-serif'], sans:['Inter','sans-serif'] }, boxShadow: { 'soft':'0 10px 30px -5px rgba(18,59,53,0.08)', 'card':'0 20px 40px -15px rgba(18,59,53,0.12)' } } } };</script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased selection:bg-emeraldNature selection:text-white flex flex-col min-h-screen" data-page="destinasi">
+
+<!-- NAVBAR (sama seperti index.html) -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent text-white py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2.5 group text-left">
+            <div class="w-11 h-11 rounded-xl overflow-hidden  justify-center shadow-md group-hover:scale-105 transition-transform"><img src="gambar/gambar2.png" alt="Logo" class="w-full h-full object-contain p-1" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'compass\' class=\'w-6 h-6 text-forest\'></i>'; lucide.createIcons();"></div>
+            <div><span class="font-heading font-bold text-xl tracking-tight block leading-none">Nuansa<span class="text-amberWarm">Tasikmalaya</span></span><span class="text-[11px] uppercase tracking-widest opacity-85 font-medium">Tasikmalaya</span></div>
+        </a>
+        <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+            <a href="index.html" data-nav="home" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-white/15">Home</a>
+            <a href="wisata.html" data-nav="destinasi" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-white/15">Destinasi</a>
+            <a href="peta.html" data-nav="peta" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-white/15">Peta Wisata</a>
+            <a href="trip-planner.html" data-nav="planner" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-white/15">Trip Planner</a>
+            <a href="kuliner.html" data-nav="kuliner" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-white/15">Kuliner</a>
+            <a href="artikel.html" data-nav="artikel" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-white/15">Artikel</a>
+            <a href="kontak.html" data-nav="kontak" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-white/15">Kontak</a>
+        </nav>
+        <div class="flex items-center gap-2.5">
+            <button onclick="toggleFavoritesModal()" class="relative p-2.5 rounded-xl bg-white/15 hover:bg-white/25 flex items-center gap-1.5"><i data-lucide="heart" class="w-5 h-5 text-amberWarm fill-amberWarm"></i><span class="hidden sm:inline text-xs font-semibold">Favorit</span><span id="fav-badge" class="ml-0.5 px-1.5 py-0.5 text-[11px] font-bold rounded-full bg-amberWarm text-forest">0</span></button>
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl bg-white/15"><i data-lucide="menu" class="w-6 h-6"></i></button>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-forest text-white border-t border-white/10 mt-3 px-4 pt-3 pb-6 shadow-2xl">
+        <div class="flex flex-col space-y-1.5">
+            <a href="index.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10 flex items-center gap-3"><i data-lucide="home" class="w-4 h-4 text-amberWarm"></i> Home</a>
+            <a href="wisata.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10 flex items-center gap-3"><i data-lucide="map-pin" class="w-4 h-4 text-amberWarm"></i> Destinasi</a>
+            <a href="peta.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10 flex items-center gap-3"><i data-lucide="map" class="w-4 h-4 text-amberWarm"></i> Peta Interaktif</a>
+            <a href="trip-planner.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10 flex items-center gap-3"><i data-lucide="calendar-check" class="w-4 h-4 text-amberWarm"></i> Trip Planner</a>
+            <a href="kuliner.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10 flex items-center gap-3"><i data-lucide="utensils" class="w-4 h-4 text-amberWarm"></i> Kuliner</a>
+            <a href="artikel.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10 flex items-center gap-3"><i data-lucide="book-open" class="w-4 h-4 text-amberWarm"></i> Artikel</a>
+            <a href="kontak.html" class="px-4 py-3 rounded-xl font-medium hover:bg-white/10 flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4 text-amberWarm"></i> Kontak</a>
+        </div>
+    </div>
+</header>
+
+<main class="flex-grow pt-28 pb-20 bg-creamLight min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-forest rounded-3xl p-8 sm:p-12 text-white mb-10 shadow-xl">
+            <span class="text-amberWarm text-xs font-semibold uppercase tracking-widest">Direktori Pariwisata</span>
+            <h1 class="font-heading text-3xl sm:text-4xl font-bold mt-2 mb-3">Destinasi Wisata Tasikmalaya</h1>
+            <p class="text-mintSoft/85 text-sm sm:text-base">Temukan keajaiban alam, pesisir pantai eksotis, wisata keluarga, hingga kampung adat bersejarah.</p>
+        </div>
+
+        <div class="bg-white p-4 sm:p-6 rounded-3xl shadow-soft mb-8 border border-slate-100">
+            <div class="grid md:grid-cols-12 gap-4 items-center">
+                <div class="md:col-span-5 relative">
+                    <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                    <input type="text" id="dest-search" oninput="renderDestinations()" placeholder="Cari nama wisata atau kecamatan..." class="w-full pl-11 pr-4 py-3 rounded-2xl bg-creamLight border border-slate-200 focus:border-emeraldNature focus:outline-none text-sm">
+                </div>
+                <div class="md:col-span-4 flex flex-wrap gap-1.5" id="cat-filters">
+                    <button onclick="setDestCategory('Semua')" data-cat="Semua" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-forest text-white">Semua</button>
+                    <button onclick="setDestCategory('Pegunungan')" data-cat="Pegunungan" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-mintSoft text-forest hover:bg-emeraldNature hover:text-white">Pegunungan</button>
+                    <button onclick="setDestCategory('Pantai')" data-cat="Pantai" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-mintSoft text-forest hover:bg-emeraldNature hover:text-white">Pantai</button>
+                    <button onclick="setDestCategory('Alam')" data-cat="Alam" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-mintSoft text-forest hover:bg-emeraldNature hover:text-white">Alam</button>
+                    <button onclick="setDestCategory('Budaya')" data-cat="Budaya" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-mintSoft text-forest hover:bg-emeraldNature hover:text-white">Budaya</button>
+                    <button onclick="setDestCategory('Keluarga')" data-cat="Keluarga" class="cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-mintSoft text-forest hover:bg-emeraldNature hover:text-white">Keluarga</button>
+                </div>
+                <div class="md:col-span-3 flex items-center gap-2">
+                    <i data-lucide="arrow-up-down" class="w-4 h-4 text-emeraldNature shrink-0"></i>
+                    <select id="dest-sort" onchange="renderDestinations()" class="w-full py-3 px-3.5 rounded-2xl bg-creamLight border border-slate-200 text-xs sm:text-sm font-medium text-forest focus:outline-none">
+                        <option value="popular">Urutkan: Terpopuler</option>
+                        <option value="rating">Rating Tertinggi</option>
+                        <option value="price-asc">Tiket Termurah</option>
+                        <option value="price-desc">Tiket Termahal</option>
+                        <option value="name">Nama (A - Z)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <p id="dest-count-label" class="text-sm text-slate-600 font-medium mb-6">Menampilkan semua destinasi wisata</p>
+        <div id="destinations-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+    </div>
+</main>
+
+<!-- FAVORITES MODAL + TOAST + FOOTER (sama seperti index.html) -->
+<div id="favorites-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-forest/70 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl max-h-[85vh] flex flex-col">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+            <div class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-xl bg-mintSoft text-emeraldNature flex items-center justify-center"><i data-lucide="heart" class="w-5 h-5 fill-emeraldNature"></i></div><h3 class="font-heading font-bold text-lg text-forest">Destinasi Favorit Anda</h3></div>
+            <button onclick="toggleFavoritesModal()" class="p-2 rounded-xl hover:bg-slate-100 text-slate-500"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+        <div id="favorites-list-container" class="py-4 overflow-y-auto space-y-3 flex-grow"></div>
+    </div>
+</div>
+<div id="toast-notification" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-forest text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-white/15 flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl bg-amberWarm text-forest flex items-center justify-center shrink-0"><i data-lucide="check-circle-2" class="w-5 h-5"></i></div>
+        <p id="toast-message" class="text-xs sm:text-sm font-medium">Aksi berhasil!</p>
+    </div>
+</div>
+<footer class="bg-forest text-white pt-16 pb-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+            <div><div class="flex items-center gap-2.5 mb-4"><div class="w-12 h-12 rounded-xl overflow-hidden justify-center"><img src="gambar/gambar2.png" alt="Logo" class="w-full h-full object-contain p-1"></div><span class="font-heading font-bold text-xl">Nuansa <span class="text-amberWarm">Tasikmalaya</span></span></div><p class="text-mintSoft/80 text-sm">Portal pariwisata digital Tasikmalaya.</p></div>
+            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Eksplorasi</h4><ul class="space-y-2.5 text-sm text-mintSoft/80"><li><a href="index.html" class="hover:text-amberWarm">Beranda</a></li><li><a href="wisata.html" class="hover:text-amberWarm">Destinasi</a></li><li><a href="peta.html" class="hover:text-amberWarm">Peta Wisata</a></li><li><a href="trip-planner.html" class="hover:text-amberWarm">Trip Planner</a></li></ul></div>
+            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Ragam Pesona</h4><ul class="space-y-2.5 text-sm text-mintSoft/80"><li><a href="wisata.html?kategori=Pegunungan" class="hover:text-amberWarm">Pegunungan</a></li><li><a href="wisata.html?kategori=Pantai" class="hover:text-amberWarm">Pantai</a></li><li><a href="kuliner.html" class="hover:text-amberWarm">Kuliner</a></li><li><a href="artikel.html" class="hover:text-amberWarm">Artikel</a></li></ul></div>
+            <div><h4 class="font-heading font-bold text-base mb-4 text-amberWarm">Layanan</h4><ul class="space-y-3 text-sm text-mintSoft/80"><li><i data-lucide="map-pin" class="w-4 h-4 text-amberWarm inline mr-2"></i>Jl. KHZ. Mustofa No. 124</li><li><i data-lucide="mail" class="w-4 h-4 text-amberWarm inline mr-2"></i>nuansatasik@nuansatasik.id
+</li></ul></div>
+        </div>
+        <div class="pt-8 text-center text-xs text-mintSoft/60">&copy; 2026 Nuansa Tasikmalaya.</div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+    // ===== Wisata Page Script =====
+    let selectedCategory = 'Semua';
+
+    function setDestCategory(cat) {
+        selectedCategory = cat;
+        document.querySelectorAll('.cat-btn').forEach(b => {
+            if (b.dataset.cat === cat) { b.classList.remove('bg-mintSoft','text-forest'); b.classList.add('bg-forest','text-white'); }
+            else { b.classList.add('bg-mintSoft','text-forest'); b.classList.remove('bg-forest','text-white'); }
+        });
+        renderDestinations();
+    }
+
+    function renderDestinations() {
+        const search = (document.getElementById('dest-search')?.value || '').toLowerCase();
+        const sortBy = document.getElementById('dest-sort')?.value || 'popular';
+        let filtered = destinationsData.filter(d => {
+            const matchCat = selectedCategory === 'Semua' || d.category === selectedCategory;
+            const matchText = d.name.toLowerCase().includes(search) || d.district.toLowerCase().includes(search) || d.description.toLowerCase().includes(search);
+            return matchCat && matchText;
+        });
+        if (sortBy === 'rating') filtered.sort((a,b) => b.rating - a.rating);
+        else if (sortBy === 'price-asc') filtered.sort((a,b) => a.price - b.price);
+        else if (sortBy === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+        else if (sortBy === 'name') filtered.sort((a,b) => a.name.localeCompare(b.name));
+
+        document.getElementById('dest-count-label').textContent = `Menampilkan ${filtered.length} destinasi wisata`;
+        const grid = document.getElementById('destinations-grid');
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div class="col-span-full bg-white rounded-3xl p-12 text-center shadow-soft"><i data-lucide="search-x" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i><h3 class="font-heading font-bold text-lg text-forest">Destinasi Tidak Ditemukan</h3><p class="text-sm text-slate-500 mt-1">Coba ubah kata kunci atau kategori.</p></div>`;
+        } else {
+            grid.innerHTML = filtered.map(createDestinationCard).join('');
+        }
+        lucide.createIcons();
+    }
+
+    function refreshCurrentView() { renderDestinations(); }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const kategoriParam = getQueryParam('kategori');
+        const qParam = getQueryParam('q');
+        if (kategoriParam && ['Pegunungan','Pantai','Alam','Budaya','Keluarga'].includes(kategoriParam)) {
+            setDestCategory(kategoriParam);
+        } else {
+            setDestCategory('Semua');
+        }
+        if (qParam) {
+            document.getElementById('dest-search').value = qParam;
+            renderDestinations();
+        }
+    });
+</script>
+</body>
+</html>
